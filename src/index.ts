@@ -21,7 +21,7 @@ import { join, resolve } from 'path';
 import {activateHeadwind} from './headwind';
 
 const CONFIG_GLOB =
-  '**/{tailwind,tailwind.config,tailwind-config,.tailwindrc}.js'
+  '**/assets/{tailwind,tailwind.config,tailwind-config,.tailwindrc}.js'
 
 let LANGUAGES: string[] = []
 
@@ -104,7 +104,7 @@ export async function activate(context: ExtensionContext) {
       clients.set(folder.uri.toString(), null)
 
       try {
-        const configFiles = await fg([join(Uri.parse(folder.uri).fsPath, CONFIG_GLOB), '!**/node_modules/**'])
+        const configFiles = await fg([join(Uri.parse(folder.uri).fsPath, CONFIG_GLOB), '!**/assets/node_modules/**'])
         if (!configFiles || configFiles.length === 0) {
           return
         }
